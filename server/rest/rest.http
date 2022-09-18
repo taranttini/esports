@@ -1,0 +1,40 @@
+@baseURL = http://localhost:3333
+@gameId = {{list_games.response.body.$.[0].id}}
+@ads = {{list_ads_by_gameId.response.body.$.[0].id}}
+
+### b3c82249-d3b7-4818-b19f-a8d84fb2392d
+
+###
+# @name home
+GET {{baseURL}}
+
+###
+# @name list_games
+GET {{baseURL}}/games
+
+
+###
+# @name list_ads_by_gameId
+GET {{baseURL}}/games/{{gameId}}/ads
+Content-Type: application/json
+
+###
+# @name list_discord_by_adId
+GET {{baseURL}}/games/{{ads}}/discord
+
+###
+
+###
+# @name create_add
+POST {{baseURL}}/games/{{gameId}}/ads
+Content-Type: application/json
+
+{ 
+  "name": "novo user",
+  "yearsPlaying": 2,
+  "discord": "tau#1234",
+  "weekDays": [0,1,2],
+  "hourStart": "18:00",
+  "hourEnd": "19:00",
+  "useVoiceChannel": true
+}
